@@ -1,0 +1,26 @@
+gerrit 版本为2.7
+
+gerrit验证方式选择 OPENID_SSO，使用的是crowdid做为用户验证服务。
+
+进入gerrit安装目录:
+cd review_site/etc/
+vi gerrit.config，修改如下：
+
+1
+2
+3
+4
+5
+[auth]
+        type = OPENID_SSO
+        openIdSsoUrl = http://www.exampledomain.com/openidserver/op
+        logoutUrl = http://www.exampledomain.com/openidserver/logoff.action
+        maxOpenIdSessionAge = 0
+        也可以使用如下命令修改：
+
+1
+git config --file gerrit.config auth.openIdSsoUrl http://www.exampledomain/openidserver/op
+根据自己的情况替换 www.exampledomain.com
+
+修改完成，重启gerrit服务。
+进入gerrit页面，点击，右上角sign in，直接跳到 crowdid登录页面，填写正确的 账号，密码后，返回gerrit。So perfect
